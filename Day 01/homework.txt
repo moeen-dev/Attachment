@@ -1,0 +1,25 @@
+📝 Homework-01 07-09-2025
+-Task 1: Personal Profile Page
+- Add: Name, Age, Address, Contact Info
+- Profile Picture
+- List of hobbies (ul/ol)
+- Links to your favorite websites
+- A table showing your skills and experience
+
+-Task 2: Product Page
+-Product Name, Description, Price
+-Product Image
+-Add to Cart button
+-Use <div> to group sections
+
+-Task 3: Experiment with Tags
+-Use <strong>, <em>
+-Use <br> for line breaks
+-Use semantic tags like <header>, <footer>
+
+-Task 4 (Challenge)
+-Create a webpage with:
+-Header with navigation
+-Two sections for content
+-Footer with contact info
+-A form to submit name & email
