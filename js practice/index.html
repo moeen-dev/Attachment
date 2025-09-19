@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Practice</title>
+</head>
+
+<body>
+
+    <!-- 6 Mouse Event -->
+    <button id="myBtn">Go to Moeen GitHub</button>
+
+    <script>
+        //1 Variable and typeof practice
+        let name = "Moeen";
+        const age = 22;
+        var isStudent = true;
+
+        // new variable null, undefined
+        let address = null;
+        let country;
+
+        console.log(typeof name);
+        console.log(typeof age);
+        console.log(typeof isStudent);
+
+        // print new variable
+        console.log(typeof address);
+        console.log(typeof country); //null but console object will be print object
+
+
+        //2 uses of template literal 
+        let myName = "Moeen Uddin";
+        let myAge = 22;
+
+        console.log(`Hello, I am${myName} and I am ${myAge} years old.`);
+
+        //3 Make object and using of object
+        const car = {
+            brand: "Volvo",
+            model: "EX40",
+            price: 328488
+        };
+
+        console.log(car.brand);
+        console.log(car.model);
+        console.log(car.price);
+
+        car.CC = 120;
+        console.log(car);
+
+        //4 Math and random function
+        let randomNum = Math.floor(Math.random() * 20) + 1;
+        console.log("Random number:", randomNum);
+
+        //5 Prompt, Alert, Confirm
+        let favColor = prompt("What is your favorite color?");
+        let showMsg = confirm("Do you want to see your favorite color?");
+
+        if (showMsg) {
+            alert(`Your favorite color is, ${favColor}😁`);
+        }
+
+        //6 Mouse Event
+        let btn = document.getElementById("myBtn");
+
+        btn.onclick = function () {
+            window.location.href = "https://github.com/moeen-dev";
+        };
+    </script>
+</body>
+
+</html>
