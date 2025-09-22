@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event dive</title>
+</head>
+
+<body>
+
+    <button onclick="alert('Button Clicked!')">Click to show alert</button>
+    <br><br>
+
+    <input type="text" id="inputBox" placeholder="Type anything">
+    <h1 id="outputText"></h1>
+
+    <div id="hoverBox" style="width: 200px; height: 100px; background: lightgreen; text-align: center; color: white;">
+        Hover over here
+    </div>
+
+    <script>
+        document.getElementById("inputBox").addEventListener("input", function () {
+            document.getElementById("outputText").innerHTML = this.value;
+        });
+
+        // Mouse hover event(mouseenter, mouseleave)
+        document.getElementById("hoverBox").addEventListener("mouseenter", function () {
+            this.style.backgroundColor = "gray";
+        });
+        document.getElementById("hoverBox").addEventListener("mouseleave", function () {
+            this.style.backgroundColor = "lightgreen";
+        });
+    </script>
+</body>
+
+</html>

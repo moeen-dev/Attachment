@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Handling</title>
+</head>
+
+<body>
+    <h2>Login Form</h2>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Username here"><br><br>
+        <input type="password" id="password" placeholder="Password here"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="errorMsg" style="color: red;"></p>
+    <p id="successMsg" style="color: green;"></p>
+
+    <script>
+        document.getElementById('loginForm').addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+
+            if (password === "") {
+                document.getElementById("errorMsg").innerHTML = "Password is required!";
+            } else {
+                console.log("Username:", username);
+                console.log("Password", password);
+                document.getElementById("successMsg").innerHTML = "Submit Successfull! (Check Browser Console)";
+            }
+        });
+    </script>
+</body>
+
+</html>

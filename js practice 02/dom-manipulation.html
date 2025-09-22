@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation</title>
+</head>
+
+<body>
+    <ul id="myList">
+        <li>User 1</li>
+    </ul>
+
+    <button onclick="addItem()">Add Item</button>
+    <button onclick="removeItem()">Remove Last Item</button>
+
+    <script>
+        function addItem() {
+            let ul = document.getElementById("myList");
+            let li = document.createElement("li");
+            let count = ul.childElementCount + 1;
+            li.innerText = "User " + count;
+            ul.appendChild(li);
+        }
+
+        function removeItem() {
+            let ul = document.getElementById("myList");
+            if (ul.lastElementChild) {
+                ul.removeChild(ul.lastElementChild);
+            }
+        }
+    </script>
+</body>
+
+</html>
