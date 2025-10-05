@@ -23,7 +23,7 @@
         $file_size = $file['size'];
 
         $file_type = explode('.', $file_name);
-        $file_extension = strtolower(end($file_type)); // correct
+        $file_extension = strtolower(end($file_type));
 
         $allowed_extensions = ['png', 'jpg', 'jpeg'];
         $max_size = 5 * 1024 * 1024;
