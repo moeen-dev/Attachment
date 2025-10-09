@@ -37,13 +37,14 @@
             <!-- Name -->
             <div class="form-group">
                 <label for="name" class="form-label">Enter Your Name Here <span class="text-danger">*</span></label>
-                <input type="name" name="name" id="name" class="form-control">
+                <input type="name" name="name" id="name" class="form-control" required>
                 <small class="error-msg" id="name"></small>
             </div>
 
             <!-- Email -->
             <div class="form-group">
-                <label for="email" class="form-label"></label>
+                <label for="email" class="form-label">Enter Your Eamil Here <span class="text-danger">*</span></label>
+                <input type="email" name="email" id="email" class="form-control" required>
             </div>
         </form>
     </div>
