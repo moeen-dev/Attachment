@@ -33,43 +33,38 @@
     <div class="form-container">
         <h4 class="text-center mb-4">Registration Form</h4>
 
-        <form action="">
+        <form action="register_process.php" method="POST">
             <!-- Name -->
             <div class="form-group mb-3">
                 <label for="name" class="form-label">Enter Your Name Here <span class="text-danger">*</span></label>
                 <input type="name" name="name" id="name" class="form-control" required>
-                <small class="error-msg" id="name"></small>
             </div>
 
             <!-- Email -->
             <div class="form-group mb-3">
                 <label for="email" class="form-label">Enter Your Eamil Here <span class="text-danger">*</span></label>
                 <input type="email" name="email" id="email" class="form-control" required>
-                <small class="error-msg" id="email"></small>
             </div>
 
             <!-- Password -->
             <div class="form-group mb-3">
                 <label for="password" class="form-label">Enter Your Password Here <span class="text-danger">*</span></label>
                 <input type="password" name="password" id="password" class="form-control" required>
-                <small class="error-msg" id="password"></small>
             </div>
 
             <!-- Confirm Password -->
             <div class="form-group mb-3">
                 <label for="confirm_password" class="form-label">Re-enter Your Password <span class="text-danger">*</span></label>
                 <input type="confirm_password" name="confirm_password" id="confirm_password" class="form-control" required>
-                <small class="error-msg" id="confirm_password"></small>
             </div>
 
             <!-- Phone Number -->
             <div class="form-group mb-3">
                 <label for="phone" class="form-label">Enter Your Phone Number <span class="text-danger">*</span></label>
                 <input type="number" name="phone" id="phone" class="form-control" required>
-                <small class="error-msg" id="phone"></small>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Register</button>
+            <button type="submit" name="register" class="btn btn-primary w-100">Register</button>
         </form>
     </div>
 
