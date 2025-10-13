@@ -80,7 +80,7 @@ if (isset($_POST['register'])) {
             die("Database connection failed: " . $conn->error);
         }
 
-        // crerate Table if not exists
+        // crerate Table if not exists on db
         $createTable = "
             CREATE TABLE IF NOT EXISTS `admins` (
             `id` INT(11) AUTO_INCREMENT PRIMARY KEY,
