@@ -1,8 +1,7 @@
 <?php
 
-include_once 'db.php';
-
 session_start();
+include_once 'db.php';
 
 if(isset($_POST['register'])) {
     $name = $_POST['name'];
@@ -33,8 +32,22 @@ if(isset($_POST['register'])) {
         $errorr['phone_error'] = "Please Inter Phone Number!";
     }
 
-    if(empty($error)) {
-        $sql;
+    if (empty($error)) {
+        // Create Database if fnot exists
+        $db_name = "registration_form";
+        $create_db = "CREATE DATABASE IF NOT EXISTS `$db_name`";
+
+        if ($conn->query($create_db) === TRUE) {
+            $conn->select_db($db_name);
+            echo "success";
+        } else {
+            die("Database connection failed: " . $conn->error);
+        }
+
+        // crerate Table if not exists
+        $createTable = "
+        
+        ";
     }
 }
 

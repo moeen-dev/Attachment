@@ -13,7 +13,7 @@
         }
 
         .form-container {
-            max-width: 450px;
+            max-width: 720px;
             margin: 50px auto;
             background: #fff;
             padding: 25px;
@@ -34,10 +34,21 @@
         <h4 class="text-center mb-4">Registration Form</h4>
 
         <form action="register_process.php" method="POST">
-            <!-- Name -->
+            <!-- User Image -->
             <div class="form-group mb-3">
-                <label for="name" class="form-label">Enter Your Name Here <span class="text-danger">*</span></label>
-                <input type="name" name="name" id="name" class="form-control" required>
+                <label for="user_image" class="form-label">Select Your Image <spna class="text-danger">*</spna></label>
+                <input type="file" name="user_image" id="user_image" class="form-control" required>
+            </div>
+            <!-- First Name -->
+            <div class="form-group mb-3">
+                <label for="first_name" class="form-label">Enter Your Name Here <span class="text-danger">*</span></label>
+                <input type="first_name" name="first_name" id="first_name" class="form-control" required>
+            </div>
+
+            <!-- Last Name -->
+            <div class="form-group mb-3">
+                <label for="last_name" class="form-label">Enter Your Name Here <span class="text-danger">*</span></label>
+                <input type="last_name" name="last_name" id="last_name" class="form-control" required>
             </div>
 
             <!-- Email -->
@@ -63,6 +74,28 @@
                 <label for="phone" class="form-label">Enter Your Phone Number <span class="text-danger">*</span></label>
                 <input type="number" name="phone" id="phone" class="form-control" required>
             </div>
+
+            <!-- Gender -->
+            <div class="form-group mb-3">
+                <label for="gender" class="form-label d-block">Select Your Gender <span class="text-danger">*</span></label>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="Male" required>
+                    <label class="form-check-label" for="male">Male</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+                    <label class="form-check-label" for="female">Female</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="other" value="Other">
+                    <label class="form-check-label" for="other">Other</label>
+                </div>
+            </div>
+
+
 
             <button type="submit" name="register" class="btn btn-primary w-100">Register</button>
         </form>
