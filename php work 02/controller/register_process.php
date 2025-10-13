@@ -98,5 +98,26 @@ if (isset($_POST['register'])) {
         if ($conn->query($createTable) !== TRUE) {
             die("Table Creation Failed:" . $conn->error);
         }
+
+        // Uniuque Id
+        $unique_id = strtoupper(uniqid('ADM'));
+
+        // Make Hash Passwords
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+        $upload_dir = "/../uploads/";
+
+        if(!is_dir($upload_dir)) {
+            mkdir($upload_dir, 0075, true);
+        }
+
+        $image_name = uniqid(). '-' . basename($image['name']);
+        $image_path = $upload_dir . $image_name;
+
+        if(!move_uploaded_file($image['tmp_name'], $image_path)) {
+            die("Failed to upload image!");
+        }
+
+
     }
 }
