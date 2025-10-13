@@ -44,9 +44,29 @@ if (isset($_POST['register'])) {
         $errorr[] = "Please Inter valid phone number!";
     }
 
+    // gender error
     if (!in_array($gender, ['Male', 'Female', 'Other'])) {
         $errors[] = "Gender is required";
     }
+
+    // image error
+    if (!$image || $image['error'] !== 0) {
+        $errors[] = "Image is required!";
+    } else {
+        // image types validate
+        $allowed_types = ['image/jpeg', 'image/png', 'image/jpg'];
+        if(!in_array($image['type'], $allowed_types)) {
+            $errors[] = "Image must be JPG, JPEG, PNG!";
+        }
+
+        // 2MB Max image validate
+        $allowed_size = 2 * 1024 * 1024; 
+        if ($image['size'] > $allowed_size) {
+            $errors[] = "Image must be less than 2MB";
+        }
+    }
+
+
 
     if (empty($error)) {
         // Create Database if fnot exists
@@ -76,7 +96,7 @@ if (isset($_POST['register'])) {
         ";
 
         if ($conn->query($createTable) !== TRUE) {
-            die ("Table Creation Failed:" . $conn->error);
+            die("Table Creation Failed:" . $conn->error);
         }
     }
 }
