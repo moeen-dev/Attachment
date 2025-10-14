@@ -33,7 +33,7 @@
     <div class="form-container">
         <h4 class="text-center mb-4">Registration Form</h4>
 
-        <form action="register_process.php" method="POST">
+        <form action="controller/register_process.php" method="POST" enctype="multipart/form-data">
             <!-- User Image -->
             <div class="form-group mb-3">
                 <label for="user_image" class="form-label">Select Your Image <spna class="text-danger">*</spna></label>

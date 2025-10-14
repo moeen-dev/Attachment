@@ -36,12 +36,12 @@ if (isset($_POST['register'])) {
     }
 
     if ($password !== $confirm_password) {
-        $error[] = "Password do not mathched!";
+        $errors[] = "Password do not mathched!";
     }
 
     // for phone error
     if (empty($phone) || !preg_match("/^[0-9]{10,15}$/", $phone)) {
-        $errorr[] = "Please Inter valid phone number!";
+        $errors[] = "Please Inter valid phone number!";
     }
 
     // gender error
@@ -55,12 +55,12 @@ if (isset($_POST['register'])) {
     } else {
         // image types validate
         $allowed_types = ['image/jpeg', 'image/png', 'image/jpg'];
-        if(!in_array($image['type'], $allowed_types)) {
+        if (!in_array($image['type'], $allowed_types)) {
             $errors[] = "Image must be JPG, JPEG, PNG!";
         }
 
         // 2MB Max image validate
-        $allowed_size = 2 * 1024 * 1024; 
+        $allowed_size = 2 * 1024 * 1024;
         if ($image['size'] > $allowed_size) {
             $errors[] = "Image must be less than 2MB";
         }
@@ -68,14 +68,13 @@ if (isset($_POST['register'])) {
 
 
 
-    if (empty($error)) {
+    if (empty($errors)) {
         // Create Database if fnot exists
         $db_name = "registration_form";
         $create_db = "CREATE DATABASE IF NOT EXISTS `$db_name`";
 
         if ($conn->query($create_db) === TRUE) {
             $conn->select_db($db_name);
-            echo "success";
         } else {
             die("Database connection failed: " . $conn->error);
         }
@@ -105,19 +104,49 @@ if (isset($_POST['register'])) {
         // Make Hash Passwords
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        $upload_dir = "/../uploads/";
+        $upload_dir = __DIR__ . '/uploads/';
 
-        if(!is_dir($upload_dir)) {
+        if (!is_dir($upload_dir)) {
             mkdir($upload_dir, 0075, true);
         }
 
-        $image_name = uniqid(). '-' . basename($image['name']);
+        $image_name = uniqid() . '-' . basename($image['name']);
         $image_path = $upload_dir . $image_name;
 
-        if(!move_uploaded_file($image['tmp_name'], $image_path)) {
+        if (!move_uploaded_file($image['tmp_name'], $image_path)) {
             die("Failed to upload image!");
         }
 
+        $image_db_path = 'uploads/' . $image_name;
 
+        // Not Understandable coding
+        try {
+            $stmt = $conn->prepare("INSERT INTO admins (first_name, last_name, email, password, phone, gender, image) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssssss", $first_name, $last_name, $email, $hashed_password, $phone, $gender, $image_db_path);
+
+            if ($stmt->execute()) {
+                header("Location: ../index.php?status=success");
+                echo "<p style='color:green;'>Registration Successful!</p>";
+                exit;
+            } else {
+                header("Location: ../register.php?status=failed");
+                exit;
+            }
+            $stmt->close();
+        } catch (mysqli_sql_exception $e) {
+            // Duplicate email error 
+            if ($e->getCode() == 1062) {
+                header("Location: ../register.php?error=duplicate_email");
+                echo "<p style='color:red;'>This email is already registered. Please use another one.</p>";
+                exit;
+            } else {
+                header("Location: ../register.php?error=database_error");
+                exit;
+            }
+        }
+    } else {
+        foreach ($errors as $err) {
+            echo "<p style='color:red;'>$err</p>";
+        }
     }
 }
