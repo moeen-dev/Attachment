@@ -11,6 +11,15 @@
 
 <body>
 
+<div class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+        <a href="#" class="navbar-brand">Information</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportContent" area-controls="navbarSupportedContent" area-expand="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>
+
 
     <div class="container">
         <div class="row">
