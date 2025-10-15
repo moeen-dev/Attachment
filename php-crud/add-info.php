@@ -1,3 +1,10 @@
+<?php
+
+include_once 'controller/db.php';
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +17,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-lg-12">
-                <form action="">
+                <form action="controlle/info-controller.php" method="POST">
                     <div class="form-group mb-3">
                         <label for="first_name" class="form-label">First Name <span class="text-danger">*</span></label>
                         <input type="text" name="first_name" id="first_name" class="form-control" required autocomplete="off">
