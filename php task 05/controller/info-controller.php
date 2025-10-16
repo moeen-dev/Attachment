@@ -19,7 +19,7 @@ if(isset($_POST['submit'])) {
     }
 
     // last name error
-    if (empty($last_name) || !preg_match("/^[a-aZ-Z]+$/", $last_name)) {
+    if (empty($last_name) || !preg_match("/^[a-zA-Z]+$/", $last_name)) {
         $errors[] = "Last name required and must be contain only letters!";
     }
 
@@ -29,13 +29,29 @@ if(isset($_POST['submit'])) {
     }
 
     // phone number error
-    if (empty($phone_number) || !preg_match('/^[0-9]{10.15}$/', $phone_number)) {
+    if (empty($phone_number) || !preg_match('/^[0-9]{10,15}$/', $phone_number)) {
         $errors[] = "Valid number is required!";
     }
 
     // Address error
-    if (empty($address)) {
+    if (empty($address) || strlen($address) < 6 ) {
         $errors[] = "Address is required!";
+    }
+
+    if (!empty($errors)) {
+        header("Location: ../add-info.php?" . http_build_query($errors));
+        exit;
+    }else {
+        $sql = "INSERT INTO users(`first_name`, `last_name`, `email`, `phone_number`, `address`) VALUES ('$first_name','$last_name','$email','$phone_number','$address')";
+        $query = $conn->query($sql);
+
+        if ($query == TRUE) {
+            header("Location: ../index.php");
+            exit();
+        }else {
+            header("Location: ../add-info.php");
+            exit();
+        }
     }
 }
 

@@ -8,6 +8,8 @@
     <?php include_once 'partials/nav.php'; ?>
 
     <div class="container mt-5">
+
+        <a href="add-info.php" class="btn btn-primary">Add Info</a>
         <div class="row">
             <div class="col-lg-12">
                 <table class="table table-success table-striped">
