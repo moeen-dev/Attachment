@@ -22,6 +22,21 @@ if(isset($_POST['submit'])) {
     if (empty($last_name) || !preg_match("/^[a-aZ-Z]+$/", $last_name)) {
         $errors[] = "Last name required and must be contain only letters!";
     }
+
+    // email error
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Valid email is required!";
+    }
+
+    // phone number error
+    if (empty($phone_number) || !preg_match('/^[0-9]{10.15}$/', $phone_number)) {
+        $errors[] = "Valid number is required!";
+    }
+
+    // Address error
+    if (empty($address)) {
+        $errors[] = "Address is required!";
+    }
 }
 
 ?>
