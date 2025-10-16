@@ -1,3 +1,6 @@
+<?php
+include_once "controller/db.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +12,7 @@
 
     <div class="container mt-5">
 
-        <a href="add-info.php" class="btn btn-primary">Add Info</a>
+        <a href="add-info.php" class="btn btn-primary mb-3">Add Info</a>
         <div class="row">
             <div class="col-lg-12">
                 <table class="table table-success table-striped">
@@ -21,17 +24,39 @@
                             <th scope="col">User Email</th>
                             <th scope="col">User Phone</th>
                             <th scope="col">User Address</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td scope="row">#</td>
-                            <td>Moeen</td>
-                            <td>Uddin</td>
-                            <td>moeen@gmail.com</td>
-                            <td>+8801756376816</td>
-                            <td>Dhaka, Bangladesh</td>
-                        </tr>
+                        <?php
+                        $count = 1;
+                        $sql = "SELECT * FROM `users` ORDER BY `first_name` ASC";
+
+                        $query = $conn->query($sql);
+
+                        if ($query->num_rows > 0) {
+                            while ($user = $query->fetch_assoc()) {
+                        ?>
+                                <tr>
+                                    <td scope="row"><?php echo $count++; ?></td>
+                                    <td><?php echo $user['first_name']; ?></td>
+                                    <td><?php echo $user['last_name']; ?></td>
+                                    <td><?php echo $user['email']; ?></td>
+                                    <td><?php echo $user['phone_number']; ?></td>
+                                    <td><?php echo $user['address']; ?></td>
+                                    <td class="d-flex gap-3">
+                                        <a href="#" class="btn btn-info">Edit</a>
+                                        <form action="">
+                                            <input type="hidden" name="id" value="">
+                                            <button name="delete" class="btn btn-danger" onclick="return confirm('Do you want to delete it?') ">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                        <?php
+                            }
+                        }
+                        ?>
+
                     </tbody>
                 </table>
             </div>
