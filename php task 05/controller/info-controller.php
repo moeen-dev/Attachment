@@ -34,11 +34,12 @@ if(isset($_POST['submit'])) {
     }
 
     // Address error
-    if (empty($address) || strlen($address) < 6 ) {
-        $errors[] = "Address is required!";
+    if (empty($address) || strlen($address) < 4 ) {
+        $errors[] = "Address is required and must be a valid address!";
     }
 
     if (!empty($errors)) {
+        $_SESSION['errors'] = $errors;
         header("Location: ../add-info.php?" . http_build_query($errors));
         exit;
     }else {
@@ -46,6 +47,7 @@ if(isset($_POST['submit'])) {
         $query = $conn->query($sql);
 
         if ($query == TRUE) {
+            $_SESSION['success'] = "User Added successfully!";
             header("Location: ../index.php");
             exit();
         }else {

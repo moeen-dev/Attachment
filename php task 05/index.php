@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once "controller/db.php";
 ?>
 <!DOCTYPE html>
@@ -10,14 +11,29 @@ include_once "controller/db.php";
 
     <?php include_once 'partials/nav.php'; ?>
 
-    <div class="container mt-5">
+    <div class="container">
+        <?php
+        // Error message
+        if (isset($_SESSION['errors'])) {
+            foreach ($_SESSION['errors'] as $error) {
+                echo "<div class='alert alert-danger'>$error</div>";
+            }
+            unset($_SESSION['errors']);
+        }
 
-        <a href="add-info.php" class="btn btn-primary mb-3">Add Info</a>
+        // Success message
+        if (isset($_SESSION['success'])) {
+            echo "<div class='alert alert-success'>{$_SESSION['success']}</div>";
+            unset($_SESSION['success']);
+        }
+        ?>
+
+        <a href="add-info.php" class="btn btn-primary mb-3 mt-3">Add Info</a>
         <div class="row">
             <div class="col-lg-12">
                 <table class="table table-success table-striped">
                     <thead>
-                        <tr class="">
+                        <tr>
                             <th scope="col">#</th>
                             <th scope="col">First Name</th>
                             <th scope="col">Last Name</th>
@@ -45,7 +61,7 @@ include_once "controller/db.php";
                                     <td><?php echo $user['phone_number']; ?></td>
                                     <td><?php echo $user['address']; ?></td>
                                     <td class="d-flex gap-3">
-                                        <a href="#" class="btn btn-info">Edit</a>
+                                        <a href="edit-info.php?id=<?php echo $user['id']; ?>" class="btn btn-info">Edit</a>
                                         <form action="">
                                             <input type="hidden" name="id" value="">
                                             <button name="delete" class="btn btn-danger" onclick="return confirm('Do you want to delete it?') ">Delete</button>

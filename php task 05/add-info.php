@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include_once 'controller/db.php';
 
 ?>
@@ -15,6 +15,21 @@ include_once 'controller/db.php';
     <?php include_once 'partials/nav.php'; ?>
 
     <div class="container mt-5">
+        <?php
+        // Error message
+        if (isset($_SESSION['errors'])) {
+            foreach ($_SESSION['errors'] as $error) {
+                echo "<div class='alert alert-danger'>$error</div>";
+            }
+            unset($_SESSION['errors']);
+        }
+
+        // Success message
+        if (isset($_SESSION['success'])) {
+            echo "<div class='alert alert-success'>{$_SESSION['success']}</div>";
+            unset($_SESSION['success']);
+        }
+        ?>
         <div class="row">
             <div class="col-lg-12">
                 <form action="controller/info-controller.php" method="POST">
