@@ -3,7 +3,7 @@
 session_start();
 include_once 'db.php';
 
-// Add Student
+// Add info
 if(isset($_POST['submit'])) {
     $first_name = trim($_POST['first_name']);
     $last_name = trim($_POST['last_name']);
@@ -51,7 +51,64 @@ if(isset($_POST['submit'])) {
             header("Location: ../index.php");
             exit();
         }else {
-            header("Location: ../add-info.php");
+            $_SESSION['errors'] = 'Database update failed!';
+            header("Location: ../add-info.php?id=$id");
+            exit();
+        }
+    }
+}
+
+// Edit info
+if (isset($_POST['update'])) {
+
+    $id = $_POST['id'];
+    $first_name = trim($_POST['first_name']);
+    $last_name = trim($_POST['last_name']);
+    $email = trim($_POST['email']);
+    $phone_number = trim($_POST['phone_number']);
+    $address = trim($_POST['address']);
+
+    $errors = [];
+
+    // first name error
+    if (empty($first_name) || !preg_match("/^[a-zA-Z]+$/", $first_name)) {
+        $errors[] = "First name required and must be contain only letters!";
+    }
+
+    // last name error
+    if (empty($last_name) || !preg_match("/^[a-zA-Z]+$/", $last_name)) {
+        $errors[] = "Last name required and must be contain only letters!";
+    }
+
+    // email error
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Valid email is required!";
+    }
+
+    // phone number error
+    if (empty($phone_number) || !preg_match('/^[0-9]{10,15}$/', $phone_number)) {
+        $errors[] = "Valid number is required!";
+    }
+
+    // Address error
+    if (empty($address) || strlen($address) < 4) {
+        $errors[] = "Address is required and must be a valid address!";
+    }
+
+    if (!empty($errors)) {
+        $_SESSION['errors'] = $errors;
+        header("Location: ../edit-info.php?" . http_build_query($errors));
+        exit;
+    } else {
+        $sql = "UPDATE `users` SET `first_name`='$first_name',`last_name`='$last_name',`email`='$email',`phone_number`='$phone_number',`address`='$address' WHERE id = $id";
+        $query = $conn->query($sql);
+
+        if ($query == TRUE) {
+            $_SESSION['success'] = "User Updated successfully!";
+            header("Location: ../index.php");
+            exit();
+        } else {
+            header("Location: ../edit-info.php");
             exit();
         }
     }
