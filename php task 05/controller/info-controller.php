@@ -4,7 +4,7 @@ session_start();
 include_once 'db.php';
 
 // Add info
-if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
     $first_name = trim($_POST['first_name']);
     $last_name = trim($_POST['last_name']);
     $email = trim($_POST['email']);
@@ -34,7 +34,7 @@ if(isset($_POST['submit'])) {
     }
 
     // Address error
-    if (empty($address) || strlen($address) < 4 ) {
+    if (empty($address) || strlen($address) < 4) {
         $errors[] = "Address is required and must be a valid address!";
     }
 
@@ -42,7 +42,7 @@ if(isset($_POST['submit'])) {
         $_SESSION['errors'] = $errors;
         header("Location: ../add-info.php?" . http_build_query($errors));
         exit;
-    }else {
+    } else {
         $sql = "INSERT INTO users(`first_name`, `last_name`, `email`, `phone_number`, `address`) VALUES ('$first_name','$last_name','$email','$phone_number','$address')";
         $query = $conn->query($sql);
 
@@ -50,7 +50,7 @@ if(isset($_POST['submit'])) {
             $_SESSION['success'] = "User Added successfully!";
             header("Location: ../index.php");
             exit();
-        }else {
+        } else {
             $_SESSION['errors'] = 'Database update failed!';
             header("Location: ../add-info.php?id=$id");
             exit();
@@ -114,4 +114,18 @@ if (isset($_POST['update'])) {
     }
 }
 
-?>
+// Delete info
+if (isset($_POST['delete'])) {
+    $id = $_POST['id'];
+
+    $sql = "DELETE FROM `users` WHERE id = $id";
+    $query = $conn->query($sql);
+
+    if ($query == TRUE) {
+        $_SESSION['success'] = "User Deleted successfully!";
+        header("Location: ../index.php");
+    } else {
+        $_SESSION['success'] = "Something Went Wrong!";
+        header("Location: ../index.php");
+    }
+}

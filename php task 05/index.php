@@ -62,8 +62,8 @@ include_once "controller/db.php";
                                     <td><?php echo $user['address']; ?></td>
                                     <td class="d-flex gap-3">
                                         <a href="edit-info.php?id=<?php echo $user['id']; ?>" class="btn btn-info">Edit</a>
-                                        <form action="">
-                                            <input type="hidden" name="id" value="">
+                                        <form action="controller/info-controller.php" method="POST">
+                                            <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
                                             <button name="delete" class="btn btn-danger" onclick="return confirm('Do you want to delete it?') ">Delete</button>
                                         </form>
                                     </td>
