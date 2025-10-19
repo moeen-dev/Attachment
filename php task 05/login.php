@@ -1,3 +1,8 @@
+<?php
+session_start();
+include_once 'controller/db.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <?php
@@ -6,18 +11,29 @@ include_once 'partials/head.php';
 
 <body>
     <div class="container mt-5">
+        <?php
+        // Error message
+        if (isset($_SESSION['errors'])) {
+            foreach ($_SESSION['errors'] as $error) {
+                echo "<div class='alert alert-danger'>$error</div>";
+            }
+            unset($_SESSION['errors']);
+        }
+
+        // Success message
+        if (isset($_SESSION['success'])) {
+            echo "<div class='alert alert-success'>{$_SESSION['success']}</div>";
+            unset($_SESSION['success']);
+        }
+        ?>
+
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="text-center mb-4">Create Your Account</h4>
                         <!-- Login Form -->
-                        <form action="" method="POST">
-                            <!-- Name field -->
-                            <div class="form-group mb-3">
-                                <label for="name">Full Name <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Enter Your Name" autocomplete="off" required>
-                            </div>
+                        <form action="controller/authcontroller.php" method="POST">
                             <!-- Email Field -->
                             <div class="form-group mb-3">
                                 <label for="email">Email <span class="text-danger">*</span></label>
@@ -27,11 +43,6 @@ include_once 'partials/head.php';
                             <div class="form-group mb-3">
                                 <label for="password">Password <span class="text-danger">*</span></label>
                                 <input type="password" class="form-control" name="password" id="password" placeholder="Enter Your Password" autocomplete="off" required>
-                            </div>
-                            <!-- confirmed password -->
-                            <div class="form-group mb-3">
-                                <label for="confirm_password">Confirm Password <span class="text-danger">*</span></label>
-                                <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Re-enter Your Password" autocapitalize="off" required>
                             </div>
 
                             <button type="submit" name="login" class="btn btn-primary">Login</button>

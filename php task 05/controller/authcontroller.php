@@ -47,3 +47,20 @@ if (isset($_POST['register'])) {
         }
     }
 }
+
+// Login
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $sql = "SELECT * FROM users WHERE `email` = '$email' AND `password` = '$password' ";
+
+    $query = $conn->query($sql);
+
+    if ($query->num_rows > 0) {
+        $_SESSION['email'] = $email;
+        header("Location: ../index.php");
+    } else {
+        header("Location: ../login.php");
+    }
+}
