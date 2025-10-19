@@ -1,3 +1,9 @@
+<?php
+session_start();
+include_once 'controller/db.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <?php
@@ -6,13 +12,29 @@ include_once 'partials/head.php';
 
 <body>
     <div class="container mt-5">
+        <?php
+        // Error message
+        if (isset($_SESSION['errors'])) {
+            foreach ($_SESSION['errors'] as $error) {
+                echo "<div class='alert alert-danger'>$error</div>";
+            }
+            unset($_SESSION['errors']);
+        }
+
+        // Success message
+        if (isset($_SESSION['success'])) {
+            echo "<div class='alert alert-success'>{$_SESSION['success']}</div>";
+            unset($_SESSION['success']);
+        }
+        ?>
+        
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="text-center mb-4">Create Your Account</h4>
                         <!-- Form Registration -->
-                        <form action="" method="POST">
+                        <form action="controller/authcontroller.php" method="POST">
                             <!-- Name field -->
                             <div class="form-group mb-3">
                                 <label for="name">Full Name <span class="text-danger">*</span></label>

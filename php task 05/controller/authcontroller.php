@@ -11,6 +11,8 @@ if (isset($_POST['register'])) {
 
     $errors = [];
 
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
     // Validation for all empty fields
     if (empty($name) || empty($email) || empty($password) || empty($confirmed_password)) {
         $errors = 'All fields are required!';
@@ -28,19 +30,19 @@ if (isset($_POST['register'])) {
 
     if (!empty($errors)) {
         $_SESSION['errors'] = $errors;
-        header("Location: ../register.php?" . http_build_query($errors));
+        header("Location: ../register.php");
         exit;
     } else {
-        $sql = "INSERT INTO users(`name`, `email`, `password`) VALUES ('$name','$email','$phone_number','$address')";
+        $sql = "INSERT INTO users(`name`, `email`, `password`) VALUES ('$name','$email','$passwordHash')";
         $query = $conn->query($sql);
 
         if ($query == TRUE) {
-            $_SESSION['success'] = "User Added successfully!";
+            $_SESSION['success'] = "Login successfully!";
             header("Location: ../index.php");
             exit();
         } else {
             $_SESSION['errors'] = 'Database update failed!';
-            header("Location: ../add-info.php?id=$id");
+            header("Location: ../register.php?id=$id");
             exit();
         }
     }

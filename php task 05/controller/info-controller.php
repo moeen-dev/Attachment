@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
         $query = $conn->query($sql);
 
         if ($query == TRUE) {
-            $_SESSION['success'] = "User Added successfully!";
+            $_SESSION['success'] = "User info Added successfully!";
             header("Location: ../index.php");
             exit();
         } else {
