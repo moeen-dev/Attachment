@@ -46,7 +46,7 @@ include_once "controller/db.php";
                     <tbody>
                         <?php
                         $count = 1;
-                        $sql = "SELECT * FROM `users` ORDER BY `first_name` ASC";
+                        $sql = "SELECT * FROM `information` ORDER BY `first_name` ASC";
 
                         $query = $conn->query($sql);
 

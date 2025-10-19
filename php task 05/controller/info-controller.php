@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
         header("Location: ../add-info.php?" . http_build_query($errors));
         exit;
     } else {
-        $sql = "INSERT INTO users(`first_name`, `last_name`, `email`, `phone_number`, `address`) VALUES ('$first_name','$last_name','$email','$phone_number','$address')";
+        $sql = "INSERT INTO information(`first_name`, `last_name`, `email`, `phone_number`, `address`) VALUES ('$first_name','$last_name','$email','$phone_number','$address')";
         $query = $conn->query($sql);
 
         if ($query == TRUE) {
@@ -100,7 +100,7 @@ if (isset($_POST['update'])) {
         header("Location: ../edit-info.php?" . http_build_query($errors));
         exit;
     } else {
-        $sql = "UPDATE `users` SET `first_name`='$first_name',`last_name`='$last_name',`email`='$email',`phone_number`='$phone_number',`address`='$address' WHERE id = $id";
+        $sql = "UPDATE `information` SET `first_name`='$first_name',`last_name`='$last_name',`email`='$email',`phone_number`='$phone_number',`address`='$address' WHERE id = $id";
         $query = $conn->query($sql);
 
         if ($query == TRUE) {
@@ -118,7 +118,7 @@ if (isset($_POST['update'])) {
 if (isset($_POST['delete'])) {
     $id = $_POST['id'];
 
-    $sql = "DELETE FROM `users` WHERE id = $id";
+    $sql = "DELETE FROM `information` WHERE id = $id";
     $query = $conn->query($sql);
 
     if ($query == TRUE) {

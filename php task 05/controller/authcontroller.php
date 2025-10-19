@@ -1,0 +1,47 @@
+<?php
+session_start();
+include_once 'db.php';
+
+// Register 
+if (isset($_POST['register'])) {
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
+    $confirmed_password = $_POST['confirm_password'];
+
+    $errors = [];
+
+    // Validation for all empty fields
+    if (empty($name) || empty($email) || empty($password) || empty($confirmed_password)) {
+        $errors = 'All fields are required!';
+    }
+
+    // Check email format
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors = 'Invalid email format!';
+    }
+
+    // Confirmed password match
+    if ($password !== $confirmed_password) {
+        $errors[] = 'Passwords do not match!';
+    }
+
+    if (!empty($errors)) {
+        $_SESSION['errors'] = $errors;
+        header("Location: ../register.php?" . http_build_query($errors));
+        exit;
+    } else {
+        $sql = "INSERT INTO users(`name`, `email`, `password`) VALUES ('$name','$email','$phone_number','$address')";
+        $query = $conn->query($sql);
+
+        if ($query == TRUE) {
+            $_SESSION['success'] = "User Added successfully!";
+            header("Location: ../index.php");
+            exit();
+        } else {
+            $_SESSION['errors'] = 'Database update failed!';
+            header("Location: ../add-info.php?id=$id");
+            exit();
+        }
+    }
+}

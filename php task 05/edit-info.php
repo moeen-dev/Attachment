@@ -37,7 +37,7 @@ include_once 'controller/db.php';
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
 
-                    $sql = "SELECT * FROM users WHERE id = $id";
+                    $sql = "SELECT * FROM information WHERE id = $id";
                     $query = $conn->query($sql);
 
                     if ($query->num_rows > 0) {
