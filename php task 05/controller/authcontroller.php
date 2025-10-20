@@ -37,8 +37,8 @@ if (isset($_POST['register'])) {
         $query = $conn->query($sql);
 
         if ($query == TRUE) {
-            $_SESSION['success'] = "Login successfully!";
-            header("Location: ../index.php");
+            $_SESSION['success'] = "Register successfully, Please login!";
+            header("Location: ../login.php");
             exit();
         } else {
             $_SESSION['errors'] = 'Database update failed!';
@@ -50,17 +50,29 @@ if (isset($_POST['register'])) {
 
 // Login
 if (isset($_POST['login'])) {
-    $email = $_POST['email'];
+    $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM users WHERE `email` = '$email' AND `password` = '$password' ";
-
+    $sql = "SELECT * FROM users WHERE email = '$email'";
     $query = $conn->query($sql);
 
-    if ($query->num_rows > 0) {
-        $_SESSION['email'] = $email;
-        header("Location: ../index.php");
+    if ($query && $query->num_rows > 0) {
+        $user = $query->fetch_assoc();
+
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['name']  = $user['name'];
+
+            $_SESSION['success'] = "Login Successful";
+            header("Location: ../index.php");
+            exit;
+        } else {
+            $_SESSION['errors'] = ['Wrong password!'];
+        }
     } else {
-        header("Location: ../login.php");
+        $_SESSION['errors'] = ['No user found with that email!'];
     }
+
+    header("Location: ../login.php");
+    exit;
 }
