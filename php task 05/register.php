@@ -11,6 +11,9 @@ include_once 'partials/head.php';
 ?>
 
 <body>
+    <?php
+    include_once 'partials/nav.php';
+    ?>
     <div class="container mt-5">
         <?php
         // Error message

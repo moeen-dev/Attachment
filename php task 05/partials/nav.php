@@ -8,15 +8,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a href="" class="nav-link">Home</a>
+                    <a href="./index.php" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">Add Student</a>
+                    <a href="./add-info.php" class="nav-link">Add Info</a>
                 </li>
             </ul>
             <div class="d-flex gap-3">
-                <a href="" class="btn btn-success">Log Out</a>
-                <a href="" class="btn btn-primary">Profile</a>
+                <?php if (isset($_SESSION['email'])): ?>
+                    <a href="controller/logout.php" class="btn btn-success">Log Out</a>
+                <?php endif; ?>
+                <a href="./register.php" class="btn btn-primary">Register</a>
+                <a href="./login.php" class="btn btn-success">Login</a>
             </div>
         </div>
     </div>

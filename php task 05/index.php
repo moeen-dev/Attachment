@@ -28,7 +28,10 @@ include_once "controller/db.php";
         }
         ?>
 
-        <a href="add-info.php" class="btn btn-primary mb-3 mt-3">Add Info</a>
+        <?php if (isset($_SESSION['email'])): ?>
+            <a href="add-info.php" class="btn btn-primary mb-3 mt-3">Add Info</a>
+        <?php endif; ?>
+        
         <div class="row">
             <div class="col-lg-12">
                 <table class="table table-success table-striped">

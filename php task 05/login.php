@@ -31,7 +31,7 @@ include_once 'partials/head.php';
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="text-center mb-4">Please Login!</h4>
+                        <h4 class="text-center mb-4">Create Your Account</h4>
                         <!-- Login Form -->
                         <form action="controller/authcontroller.php" method="POST">
                             <!-- Email Field -->
