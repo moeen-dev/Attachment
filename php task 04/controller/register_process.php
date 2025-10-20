@@ -121,10 +121,10 @@ if (isset($_POST['register'])) {
 
         // Not Understandable coding
         try {
-            $stmt = $conn->prepare("INSERT INTO admins (first_name, last_name, email, password, phone, gender, image) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssssss", $first_name, $last_name, $email, $hashed_password, $phone, $gender, $image_db_path);
+            $sql = "INSERT INTO admins (first_name, last_name, email, password, phone, gender, image) VALUES ($first_name, $last_name, $email, $hashed_password, $phone, $gender, $image_db_path)";
+            $query = $conn->query($sql);
 
-            if ($stmt->execute()) {
+            if ($query == TRUE) {
                 header("Location: ../index.php?status=success");
                 echo "<p style='color:green;'>Registration Successful!</p>";
                 exit;
