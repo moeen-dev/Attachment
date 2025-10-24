@@ -1,6 +1,10 @@
 <?php
 session_start();
-include_once "controller/db.php";
+include_once 'controller/db.php';
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +35,7 @@ include_once "controller/db.php";
         <?php if (isset($_SESSION['email'])): ?>
             <a href="add-info.php" class="btn btn-primary mb-3 mt-3">Add Info</a>
         <?php endif; ?>
-        
+
         <div class="row">
             <div class="col-lg-12">
                 <table class="table table-success table-striped">
